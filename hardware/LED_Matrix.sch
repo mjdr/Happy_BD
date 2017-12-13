@@ -31,19 +31,6 @@ LIBS:opto
 LIBS:atmel
 LIBS:contrib
 LIBS:valves
-LIBS:arduino
-LIBS:arduino_nano
-LIBS:altera
-LIBS:analog-devices
-LIBS:conn_mics
-LIBS:lt
-LIBS:max
-LIBS:opamps
-LIBS:random-mics
-LIBS:relays-a
-LIBS:ti
-LIBS:transistors-mics
-LIBS:txs2sa-relay
 LIBS:LED_Matrix-cache
 EELAYER 25 0
 EELAYER END
@@ -1267,7 +1254,7 @@ Text GLabel 9550 4050 0    60   Input ~ 0
 MAT_SI
 Text GLabel 9550 4450 0    60   Input ~ 0
 MAT_SCK
-Text GLabel 9550 3600 0    60   Input ~ 0
+Text GLabel 9300 3350 0    60   Input ~ 0
 MAT_EN
 $Comp
 L Conn_01x15_Female J4
@@ -1294,12 +1281,12 @@ $EndComp
 $Comp
 L Conn_01x02_Male J3
 U 1 1 59E0A6F5
-P 9750 3600
-F 0 "J3" H 9750 3700 50  0000 C CNN
-F 1 "Conn_01x02_Male" H 9750 3400 50  0000 C CNN
-F 2 "Connectors_Molex:Molex_KK-6410-02_02x2.54mm_Straight" H 9750 3600 50  0001 C CNN
-F 3 "" H 9750 3600 50  0001 C CNN
-	1    9750 3600
+P 9750 3350
+F 0 "J3" H 9750 3450 50  0000 C CNN
+F 1 "Conn_01x02_Male" H 9750 3150 50  0000 C CNN
+F 2 "Connectors_Molex:Molex_KK-6410-02_02x2.54mm_Straight" H 9750 3350 50  0001 C CNN
+F 3 "" H 9750 3350 50  0001 C CNN
+	1    9750 3350
 	-1   0    0    1   
 $EndComp
 $Comp
@@ -1351,12 +1338,12 @@ Wire Wire Line
 $Comp
 L Conn_01x02_Male J6
 U 1 1 59E1E030
-P 9750 3250
-F 0 "J6" H 9750 3350 50  0000 C CNN
-F 1 "Conn_01x02_Male" H 9750 3050 50  0000 C CNN
-F 2 "Connectors_Molex:Molex_KK-6410-02_02x2.54mm_Straight" H 9750 3250 50  0001 C CNN
-F 3 "" H 9750 3250 50  0001 C CNN
-	1    9750 3250
+P 9750 3050
+F 0 "J6" H 9750 3150 50  0000 C CNN
+F 1 "Conn_01x02_Male" H 9750 2850 50  0000 C CNN
+F 2 "Connectors_Molex:Molex_KK-6410-02_02x2.54mm_Straight" H 9750 3050 50  0001 C CNN
+F 3 "" H 9750 3050 50  0001 C CNN
+	1    9750 3050
 	-1   0    0    1   
 $EndComp
 $Comp
@@ -1370,7 +1357,7 @@ F 3 "" H 10500 4100 50  0001 C CNN
 	1    10500 4100
 	1    0    0    -1  
 $EndComp
-Text GLabel 9550 3150 0    60   Input ~ 0
+Text GLabel 9550 2950 0    60   Input ~ 0
 BUZZ
 $Comp
 L Buzzer BZ1
@@ -1430,7 +1417,7 @@ Text GLabel 7050 5400 0    60   Input ~ 0
 A_Reset
 Text GLabel 8400 4400 2    60   Input ~ 0
 A_D2
-Text GLabel 9550 3500 0    60   Input ~ 0
+Text GLabel 9550 3250 0    60   Input ~ 0
 A_A0
 Text GLabel 10450 5200 0    60   Input ~ 0
 A_D2
@@ -1466,7 +1453,7 @@ Text GLabel 8400 5200 2    60   Input ~ 0
 A_D10
 Text GLabel 10450 6000 0    60   Input ~ 0
 A_D10
-Text GLabel 9550 3250 0    60   Input ~ 0
+Text GLabel 9550 3050 0    60   Input ~ 0
 A_D11
 Text GLabel 8400 5300 2    60   Input ~ 0
 A_D11
@@ -1580,6 +1567,31 @@ F 1 "+5V" V 2550 2000 50  0000 C CNN
 F 2 "" H 2550 1750 50  0001 C CNN
 F 3 "" H 2550 1750 50  0001 C CNN
 	1    2550 1750
+	0    1    1    0   
+$EndComp
+$Comp
+L R R?
+U 1 1 5A2D4750
+P 9450 3500
+F 0 "R?" V 9550 3500 50  0000 C CNN
+F 1 "10k" V 9450 3500 50  0000 C CNN
+F 2 "Resistors_SMD:R_1210_HandSoldering" V 9380 3500 50  0001 C CNN
+F 3 "" H 9450 3500 50  0001 C CNN
+	1    9450 3500
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	9300 3350 9550 3350
+Connection ~ 9450 3350
+$Comp
+L +5V #PWR?
+U 1 1 5A2D6699
+P 9450 3650
+F 0 "#PWR?" H 9450 3500 50  0001 C CNN
+F 1 "+5V" H 9450 3790 50  0000 C CNN
+F 2 "" H 9450 3650 50  0001 C CNN
+F 3 "" H 9450 3650 50  0001 C CNN
+	1    9450 3650
 	0    1    1    0   
 $EndComp
 $EndSCHEMATC

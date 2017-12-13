@@ -15,6 +15,7 @@ void UART_init(){
 void UART_trasmit(uint8_t data){
  wait_for_one(UCSR0A, UDRE0);
  UDR0 = data;
+ wait_for_one(UCSR0A, UDRE0);
 }
 
 uint8_t UART_receive(){

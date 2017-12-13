@@ -1,12 +1,13 @@
-/*
- * max7219.c
- *
- *  Created on: Nov 16, 2017
- *      Author: root
- */
-
 #include "max7219.h"
+#include "uart.h"
+#include "writer.h"
+#include "soft_spi.h"
 
+
+//#define DEBUG
+
+#define SS_UP PORT_SS |= (1<<PIN_SS)
+#define SS_DOWN PORT_SS &= ~(1<<PIN_SS)
 
 //Registers
 #define MAX7219_REG_NOOP          0x00
@@ -61,16 +62,22 @@ void MAX7219_setShutdownMode(uint8_t);
 void MAX7219_setDecodeMode(uint8_t);
 
 
-void (*spiFunction)(uint8_t);
+PrintFunc spiFunction;
 uint8_t MAX7219_buffer[8];
 
 
-
-__inline__ void MAX7219_init(void(*func)(uint8_t)){
+void MAX7219_init(PrintFunc func){
 	spiFunction = func;
 
-	MAX7219_setDecodeMode(MAX7219_VAL_NO_DECODE);
+	DDR_SS |= (1 << PIN_SS);
+
+	//MAX7219_test();
+
 	MAX7219_setShutdownMode(MAX7219_VAL_NORMAL);
+	MAX7219_setDecodeMode(MAX7219_VAL_NO_DECODE);
+	MAX7219_setIntensity(0);
+	MAX7219_writeData(MAX7219_REG_SCAN_LIMIT, 7);
+	MAX7219_writeData(MAX7219_REG_DISPLAY_TEST, MAX7219_VAL_TEST_NORMAL);
 	MAX7219_clearBuffer();
 	MAX7219_sendBuffer();
 
@@ -86,6 +93,9 @@ void MAX7219_clearBuffer(){
 
 }
 __inline__ void MAX7219_setPixel(uint8_t x, uint8_t y){
+
+	x = 7 - x;
+
 	MAX7219_buffer[y] |= (1 << x);
 }
 __inline__ void MAX7219_setIntensity(uint8_t intensity) {
@@ -99,13 +109,22 @@ __inline__ void MAX7219_setDecodeMode(uint8_t mode){
 }
 void MAX7219_sendBuffer(){
 	for(uint8_t i = 8;i > 0;i--)
-		MAX7219_writeData(i, MAX7219_buffer[i]);
+		MAX7219_writeData(i, MAX7219_buffer[i -1]);
 }
 
 
 
 void MAX7219_writeData(uint8_t reg, uint8_t value){
 	SS_DOWN;
+
+	#ifdef DEBUG
+		WRITER_writeString(UART_trasmit, "MAX7219: ");
+		WRITER_writeHex8(UART_trasmit, reg);
+		WRITER_writeString(UART_trasmit, " ");
+		WRITER_writeHex8(UART_trasmit, value);
+		WRITER_writeString(UART_trasmit, "\n\r");
+	#endif
+
 	(*spiFunction)(reg);
 	(*spiFunction)(value);
 	SS_UP;

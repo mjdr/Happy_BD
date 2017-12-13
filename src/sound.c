@@ -30,8 +30,8 @@ double getNoteFreq(char);
 
 #define setNote(N) setTone(getNoteFreq(N))
 
-#define SOUND_TIMER_PRESCALER ((1 << CS22) | (1 << CS20))
-#define SOUND_TIMER_PRESCALER_VALUE 128
+#define SOUND_TIMER_PRESCALER ((1 << CS22) | (1 << CS21))
+#define SOUND_TIMER_PRESCALER_VALUE 256
 #define SOUND_ON TCCR2B |= SOUND_TIMER_PRESCALER
 #define SOUND_OFF TCCR2B &= ~SOUND_TIMER_PRESCALER
 
@@ -42,10 +42,9 @@ double getNoteFreq(char);
 
 
 
-Delay delay;
-char note;
-int8_t state;
-int8_t currentNote;
+static Delay delay;
+static int8_t state;
+static int8_t currentNote;
 
 void SOUND_init(){
 	//Timer init
@@ -64,7 +63,6 @@ void SOUND_init(){
 }
 void SOUND_update(){
 	if(!DELAY_isOver(&delay)) return ;
-	PORTB ^= (1 << PIN0);
 
 	if(state == STATE_PAUSE) {
 		setNote(music[currentNote]);
@@ -94,9 +92,6 @@ void setTone(double freq){
 	double ocr = 16e6f/(2.0 * SOUND_TIMER_PRESCALER_VALUE * freq) - 1;
 	if(ocr < 0) ocr = 0;
 	else if(ocr > 255) ocr = 255;
-
-	WRITER_writeDec16(UART_trasmit,(uint8_t)ocr);
-	WRITER_writeString(UART_trasmit, "\n\r");
 
 	OCR2A = (uint8_t)ocr;
 }

@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+environment/project/cdt.managedbuild.toolchain.gnu.base.1504336896/AVRTARGETFCPU/delimiter=\:
+environment/project/cdt.managedbuild.toolchain.gnu.base.1504336896/AVRTARGETFCPU/operation=replace
+environment/project/cdt.managedbuild.toolchain.gnu.base.1504336896/AVRTARGETFCPU/value=1600000
+environment/project/cdt.managedbuild.toolchain.gnu.base.1504336896/AVRTARGETMCU/delimiter=\:
+environment/project/cdt.managedbuild.toolchain.gnu.base.1504336896/AVRTARGETMCU/operation=replace
+environment/project/cdt.managedbuild.toolchain.gnu.base.1504336896/AVRTARGETMCU/value=atmega328
+environment/project/cdt.managedbuild.toolchain.gnu.base.1504336896/append=true
+environment/project/cdt.managedbuild.toolchain.gnu.base.1504336896/appendContributed=true

@@ -3,7 +3,7 @@
 #include <stdint.h>
 
 typedef struct {
- int32_t startTime;
+ uint32_t startTime;
  int16_t duration;
 } Delay;
 
